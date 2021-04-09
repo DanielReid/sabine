@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/DanielReid/sabine/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/DanielReid/sabine/static/js/main.33ddadd7.chunk.js",
+    "main.js.map": "/DanielReid/sabine/static/js/main.33ddadd7.chunk.js.map",
+    "runtime-main.js": "/DanielReid/sabine/static/js/runtime-main.d1368a09.js",
+    "runtime-main.js.map": "/DanielReid/sabine/static/js/runtime-main.d1368a09.js.map",
+    "static/js/2.f3f92f8b.chunk.js": "/DanielReid/sabine/static/js/2.f3f92f8b.chunk.js",
+    "static/js/2.f3f92f8b.chunk.js.map": "/DanielReid/sabine/static/js/2.f3f92f8b.chunk.js.map",
+    "static/js/3.7c082508.chunk.js": "/DanielReid/sabine/static/js/3.7c082508.chunk.js",
+    "static/js/3.7c082508.chunk.js.map": "/DanielReid/sabine/static/js/3.7c082508.chunk.js.map",
+    "index.html": "/DanielReid/sabine/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/DanielReid/sabine/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.f3f92f8b.chunk.js.LICENSE.txt": "/DanielReid/sabine/static/js/2.f3f92f8b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d1368a09.js",
+    "static/js/2.f3f92f8b.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.33ddadd7.chunk.js"
+  ]
+}
