@@ -1,5 +1,6 @@
 import {
   Button,
+  ButtonGroup,
   Table,
   TableBody,
   TableCell,
@@ -11,6 +12,7 @@ import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { names, uniqueNamesGenerator } from "unique-names-generator";
 import "./App.css";
+import StudentNames from "./StudentNames";
 
 type Student = {
   id: number;
@@ -24,6 +26,7 @@ type SendEvent = {
 
 const N_STUDENTS = 7;
 const N_WEEKS = 6;
+const MAX_TRIES = 2000;
 
 function renderSequences(sequences: SendEvent[][], nWeeks: number) {
   return (
@@ -61,7 +64,8 @@ function genSequences(students: Student[], weeks: number[]): SendEvent[][] {
     const { chain, updated } = buildChain(
       student,
       _.sampleSize(others, others.length),
-      previousAssignments
+      previousAssignments,
+      weeks
     );
     previousAssignments = updated;
     return chain;
@@ -76,9 +80,10 @@ type ChainResponse = {
 function buildChain(
   start: Student,
   todos: Student[],
-  previousAssignments: Record<number, Record<number, boolean>>
+  previousAssignments: Record<number, Record<number, boolean>>,
+  weeks: number[]
 ): ChainResponse {
-  if (!todos.length) {
+  if (!todos.length || !weeks.length) {
     return {
       chain: [],
       updated: previousAssignments,
@@ -101,7 +106,8 @@ function buildChain(
             ...previousAssignments[start.id],
             [to.id]: true,
           },
-        }
+        },
+        _.tail(weeks)
       );
       return { chain: [{ from: start, to: to }, ...chain], updated: updated };
     }
@@ -113,6 +119,7 @@ function App() {
   const [students, setStudents] = useState<Student[]>();
   const [sequences, setSequences] = useState<SendEvent[][]>();
   const [nWeeks, setNWeeks] = useState(N_WEEKS);
+  const [studentNames, setStudentNames] = useState<string[]>();
 
   function handleNStudentsChanged(event: any) {
     if (
@@ -137,16 +144,59 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    const students = _.map(_.range(1, nStudents + 1), (n) => {
-      return {
-        id: n,
-        name: uniqueNamesGenerator({ dictionaries: [names] }),
-      };
-    });
-    setStudents(students);
-  }, [nStudents]);
+  function handleNameChange(prevName: string, newName: string) {
+    if (studentNames) {
+      const idx = studentNames.indexOf(prevName);
+      setStudentNames(Object.assign([], studentNames, { [idx]: newName }));
+    }
+  }
 
+  function handleSearchClick() {
+    if (students) {
+      let n = 0;
+      let bestNMissing = nWeeks * nStudents + 1;
+      let bestChains;
+      while (n < MAX_TRIES && bestNMissing > 0) {
+        const sequences = genSequences(students, _.range(1, nWeeks + 1));
+        const nMissing = getNMissing(sequences);
+        if (nMissing < bestNMissing) {
+          bestNMissing = nMissing;
+          bestChains = sequences;
+        }
+        ++n;
+      }
+      console.log(n);
+      setSequences(bestChains);
+    }
+  }
+
+  function getNMissing(sequences: SendEvent[][]) {
+    const sequenceLengths = _.map(
+      sequences,
+      (sequence) => nWeeks - sequence.length
+    );
+    return _.sum(sequenceLengths);
+  }
+
+  useEffect(() => {
+    if (studentNames?.length) {
+      const students = _.map(_.range(1, nStudents + 1), (n) => {
+        return {
+          id: n,
+          name: studentNames[n - 1],
+        };
+      });
+      setStudents(students);
+    }
+  }, [nStudents, studentNames]);
+
+  useEffect(() => {
+    setStudentNames(
+      _.map(_.range(1, nStudents + 1), () =>
+        uniqueNamesGenerator({ dictionaries: [names] })
+      )
+    );
+  }, [nStudents]);
   useEffect(() => {
     if (students) {
       setSequences(genSequences(students, _.range(1, nWeeks + 1)));
@@ -173,10 +223,28 @@ function App() {
           defaultValue={N_WEEKS}
         />
       </div>
+      {studentNames ? (
+        <StudentNames names={studentNames} changeCallback={handleNameChange} />
+      ) : (
+        <></>
+      )}
       <div>
-        <Button variant="contained" color="primary" onClick={handleRegenclick}>
-          Opnieuw
-        </Button>
+        <ButtonGroup>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleRegenclick}
+          >
+            Opnieuw
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSearchClick}
+          >
+            Zoek
+          </Button>
+        </ButtonGroup>
         {renderSequences(sequences, nWeeks)}
       </div>
     </div>
