@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/sabine/static/css/main.a3718f0b.chunk.css",
-    "main.js": "/sabine/static/js/main.681e1d48.chunk.js",
-    "main.js.map": "/sabine/static/js/main.681e1d48.chunk.js.map",
+    "main.js": "/sabine/static/js/main.87d46d1f.chunk.js",
+    "main.js.map": "/sabine/static/js/main.87d46d1f.chunk.js.map",
     "runtime-main.js": "/sabine/static/js/runtime-main.11f390e1.js",
     "runtime-main.js.map": "/sabine/static/js/runtime-main.11f390e1.js.map",
-    "static/js/2.9ecd4bf3.chunk.js": "/sabine/static/js/2.9ecd4bf3.chunk.js",
-    "static/js/2.9ecd4bf3.chunk.js.map": "/sabine/static/js/2.9ecd4bf3.chunk.js.map",
+    "static/js/2.e9c1f453.chunk.js": "/sabine/static/js/2.e9c1f453.chunk.js",
+    "static/js/2.e9c1f453.chunk.js.map": "/sabine/static/js/2.e9c1f453.chunk.js.map",
     "static/js/3.816d0a31.chunk.js": "/sabine/static/js/3.816d0a31.chunk.js",
     "static/js/3.816d0a31.chunk.js.map": "/sabine/static/js/3.816d0a31.chunk.js.map",
     "index.html": "/sabine/index.html",
     "static/css/main.a3718f0b.chunk.css.map": "/sabine/static/css/main.a3718f0b.chunk.css.map",
-    "static/js/2.9ecd4bf3.chunk.js.LICENSE.txt": "/sabine/static/js/2.9ecd4bf3.chunk.js.LICENSE.txt"
+    "static/js/2.e9c1f453.chunk.js.LICENSE.txt": "/sabine/static/js/2.e9c1f453.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.11f390e1.js",
-    "static/js/2.9ecd4bf3.chunk.js",
+    "static/js/2.e9c1f453.chunk.js",
     "static/css/main.a3718f0b.chunk.css",
-    "static/js/main.681e1d48.chunk.js"
+    "static/js/main.87d46d1f.chunk.js"
   ]
 }
